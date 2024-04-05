@@ -1,7 +1,6 @@
 from importlib import reload
 from PySide2 import QtCore, QtGui, QtWidgets
 from Help.UI import noraHelpWidget
-from Help.UI.noraHelpWidget import Ui_noraHelpWidget
 from General.noraUtilities import *
 import webbrowser
 
@@ -29,10 +28,10 @@ def get_use_custom_front_style():
 
 
 def docs_link():
-    webbrowser.open("http://www.baidu.com")
+    webbrowser.open(r"https://github.com/AnonCountercurrent/NoraMayaTrivialTools")
 
 
-class NoraHelp(QtWidgets.QDialog, Ui_noraHelpWidget):
+class NoraHelp(QtWidgets.QDialog, noraHelpWidget.Ui_noraHelpWidget):
     def __init__(self):
         super(NoraHelp, self).__init__()
         self.setupUi(self)
