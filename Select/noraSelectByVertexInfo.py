@@ -2,11 +2,13 @@ from importlib import reload
 from PySide2 import QtCore, QtWidgets
 from Select.UI import noraSelectByVertexInfoWidget
 from General import noraMDagObjectSelect
+from General import noraUtilities
 import maya.api.OpenMaya as om
 import maya.cmds as cmds
 
 reload(noraSelectByVertexInfoWidget)
 reload(noraMDagObjectSelect)
+reload(noraUtilities)
 
 
 def get_title():
@@ -65,10 +67,16 @@ class NoraSelectByVertexInfo(QtWidgets.QDialog, noraSelectByVertexInfoWidget.Ui_
                 vertices = mesh.getPoints(om.MSpace.kWorld)
                 indices = mesh.getTriangles()[1]
 
+                process_bar = noraUtilities.NoraProgressBar()
+                process_bar.start_progress_bar("Mesh: " + str(i + 1) + "/" + str(dag_path_list.length()), False)
+                process_bar_percentage_triangle_step = 100.0 / (len(indices) / 3.0)
+                process_bar_percentage_vert_step = 100.0 / len(vertices)
+
                 vertex_to_selection = []
                 if by_distance:
                     if same_triangle_only:
                         for j in range(0, len(indices), 3):
+                            process_bar.set_progress_bar_value(j * process_bar_percentage_triangle_step)
                             d01 = vertices[indices[j]].distanceTo(vertices[indices[j + 1]])
                             d02 = vertices[indices[j]].distanceTo(vertices[indices[j + 2]])
                             d12 = vertices[indices[j + 1]].distanceTo(vertices[indices[j + 2]])
@@ -81,6 +89,7 @@ class NoraSelectByVertexInfo(QtWidgets.QDialog, noraSelectByVertexInfoWidget.Ui_
                                     vertex_to_selection.append(indices[j + 2])
                     else:
                         for j in range(0, len(vertices)):
+                            process_bar.set_progress_bar_value(j * process_bar_percentage_vert_step)
                             for k in range(j + 1, len(vertices)):
                                 p0 = vertices[j]
                                 p1 = vertices[k]
@@ -91,6 +100,8 @@ class NoraSelectByVertexInfo(QtWidgets.QDialog, noraSelectByVertexInfoWidget.Ui_
                                         vertex_to_selection.append(k)
                     for j in range(len(vertex_to_selection)):
                         vertex_select_list.append("{0}.vtx[{1}]".format(mesh.name(), vertex_to_selection[j]))
+
+                process_bar.stop_progress_bar()
 
         if len(vertex_select_list) > 1:
             cmds.select(vertex_select_list)
