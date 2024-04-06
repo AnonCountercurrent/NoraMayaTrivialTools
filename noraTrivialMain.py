@@ -12,6 +12,7 @@ from General import noraUtilities
 reload(noraMainWindow)
 reload(noraUtilities)
 
+
 class NoraTrivialMain(QtWidgets.QDialog, Ui_noraMainWindow):
     def __init__(self, parent=None):
         super(NoraTrivialMain, self).__init__()
@@ -21,6 +22,7 @@ class NoraTrivialMain(QtWidgets.QDialog, Ui_noraMainWindow):
         self.setWindowFlags(QtCore.Qt.Window)
         self.setWindowTitle("Nora Maya Trivial Tools")
         self.setWindowIcon(QtGui.QIcon(get_icon_path("Nora_Valkyrie_Emblem_128.png")))
+        self.resize(500, 800)
 
         self.tabWidget = QTabWidget(self.mainWidget)
         self.tabWidget.setObjectName("tabWidget")

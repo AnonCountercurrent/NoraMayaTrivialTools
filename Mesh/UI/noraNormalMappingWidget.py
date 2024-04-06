@@ -194,7 +194,7 @@ class Ui_noraNormalMappingWidget(object):
         self.centerRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Center Mode", None))
         self.curveRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Curve Mode", None))
         self.label_2.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Intersect tolerance: ", None))
-        self.twoWayCheckBox.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Bidirectional detection: ", None))
+        self.twoWayCheckBox.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Bidirectional detection", None))
         self.label_3.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Max radius: ", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("noraNormalMappingWidget", u"Actions", None))
         self.normalMappingButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Normal Mapping", None))

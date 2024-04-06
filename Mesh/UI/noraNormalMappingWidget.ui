@@ -155,7 +155,7 @@
         <item>
          <widget class="QCheckBox" name="twoWayCheckBox">
           <property name="text">
-           <string>Bidirectional detection: </string>
+           <string>Bidirectional detection</string>
           </property>
           <property name="checked">
            <bool>true</bool>
