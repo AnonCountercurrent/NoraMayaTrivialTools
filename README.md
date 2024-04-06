@@ -18,7 +18,7 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 
 ## Description
 
-Notation：vertex position $$\mathbf{x}$$, vertex normal $$\mathbf{n}$$, center  $$\mathbf{c}$$, 
+Notation：vertex position $\mathbf{x}$, vertex normal $\mathbf{n}$, center  $\mathbf{c}$, 
 
 ### Normal Mapping
 
@@ -33,8 +33,8 @@ This function is used to synchronize the normals of one object (usually a smooth
 | **Cache selected vertices** | Cache selected vertices.                                     |
 | Shell                       | The target to map to, which can be a Mesh or a Nurbs surface. |
 | Center/Curve                | The center object or curve to use for mapping.               |
-| Center Mode                 | The center object's coordinates are $$\mathbf{c}$$. The function calculate the closest intersection point between the ray starting from $$\mathbf{x}$$ in the direction of $$\mathbf{x} - \mathbf{c}$$ and the Shell. |
-| Curve Mode                  | First, determine the closest point $$\mathbf{c}$$ on the curve to the vertex. Then, calculate the closest intersection point between the ray starting from $$\mathbf{x}$$ in the direction of $$\mathbf{x} - \mathbf{c}$$ and the Shell. |
+| Center Mode                 | The center object's coordinates are $\mathbf{c}$. The function calculate the closest intersection point between the ray starting from $\mathbf{x}$ in the direction of $\mathbf{x} - \mathbf{c}$ and the Shell. |
+| Curve Mode                  | First, determine the closest point $\mathbf{c}$ on the curve to the vertex. Then, calculate the closest intersection point between the ray starting from $\mathbf{x}$ in the direction of $\mathbf{x} - \mathbf{c}$ and the Shell. |
 | Intersect tolerance         | Maximum allowable error for intersection                     |
 | Bidirectional detection     | Shall we also calculate the closest intersection point (inward) between the ray starting from $\mathbf{x}$ in the direction of $\mathbf{c} - \mathbf{x}$ and the Shell? |
 | Max Radius                  | Maximum distance limit for intersection points, do not modify normals beyond the range |
@@ -73,7 +73,7 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 
 ## 功能说明
 
-标记：顶点位置 $$\mathbf{x}$$，顶点法线 $$\mathbf{n}$$，
+标记：顶点位置 $\mathbf{x}$，顶点法线 $\mathbf{n}$，
 
 ### 法线映射
 
@@ -88,10 +88,10 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 | **Cache selected vertices** | 缓存选中的顶点                                               |
 | Shell                       | 要映射的目标，可以是 Mesh，也可以是 Nurbs surface            |
 | Center/Curve                | 映射的中心物体，或者曲线                                     |
-| Center Mode                 | 中心物体坐标为 $$\mathbf{c}$$，以 $$\mathbf{x}$$ 为起点， $$\mathbf{x} - \mathbf{c}$$ 为方向的射线与 Shell 计算最近的交点 |
-| Curve Mode                  | 首先确定顶点到曲线的最近点 $$\mathbf{c}$$，以 $$\mathbf{x}$$ 为起点，$$\mathbf{x} - \mathbf{c}$$ 方向的射线与 Shell 计算最近的交点 |
+| Center Mode                 | 中心物体坐标为 $\mathbf{c}$，以 $\mathbf{x}$ 为起点， $\mathbf{x} - \mathbf{c}$ 为方向的射线与 Shell 计算最近的交点 |
+| Curve Mode                  | 首先确定顶点到曲线的最近点 $\mathbf{c}$，以 $\mathbf{x}$ 为起点，$\mathbf{x} - \mathbf{c}$ 方向的射线与 Shell 计算最近的交点 |
 | Intersect tolerance         | 求交精度                                                     |
-| Bidirectional detection     | 是否同时向以 $$\mathbf{x}$$ 为起点，$$\mathbf{c} - \mathbf{x}$$ 方向的射线与 Shell 计算最近的交点（向内） |
+| Bidirectional detection     | 是否同时向以 $\mathbf{x}$ 为起点，$\mathbf{c} - \mathbf{x}$ 方向的射线与 Shell 计算最近的交点（向内） |
 | Max Radius                  | 交点最大距离限制，超出范围后不修改法线                       |
 | **Normal Mapping**          | 根据上面的配置，修改 Mesh 的法线                             |
 
