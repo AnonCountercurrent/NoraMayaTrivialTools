@@ -89,9 +89,9 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 | Shell                       | 要映射的目标，可以是 Mesh，也可以是 Nurbs surface            |
 | Center/Curve                | 映射的中心物体，或者曲线                                     |
 | Center Mode                 | 中心物体坐标为 $\mathbf{c}$，以 $\mathbf{x}$ 为起点， $\mathbf{x} - \mathbf{c}$ 为方向的射线与 Shell 计算最近的交点 |
-| Curve Mode                  | 首先确定顶点到曲线的最近点 $\mathbf{c}$，以 $\mathbf{x}$ 为起点，$\mathbf{x} - \mathbf{c}$ 方向的射线与 Shell 计算最近的交点 |
+| Curve Mode                  | 首先确定顶点到曲线的最近点 $\mathbf{c}$，以 $\mathbf{x}$ 为起点, $\mathbf{x} - \mathbf{c}$ 方向的射线与 Shell 计算最近的交点 |
 | Intersect tolerance         | 求交精度                                                     |
-| Bidirectional detection     | 是否同时向以 $\mathbf{x}$ 为起点，$\mathbf{c} - \mathbf{x}$ 方向的射线与 Shell 计算最近的交点（向内） |
+| Bidirectional detection     | 是否同时向以 $\mathbf{x}$ 为起点, $\mathbf{c} - \mathbf{x}$ 方向的射线与 Shell 计算最近的交点（向内） |
 | Max Radius                  | 交点最大距离限制，超出范围后不修改法线                       |
 | **Normal Mapping**          | 根据上面的配置，修改 Mesh 的法线                             |
 
