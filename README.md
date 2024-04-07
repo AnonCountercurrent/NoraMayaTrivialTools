@@ -47,7 +47,7 @@ This function is used to synchronize the normals of one object (usually a smooth
 
 Used to select elements that meet the conditions
 
-| 参数                     | 功能                                                         |
+| parameter                | illustrate                                                   |
 | ------------------------ | ------------------------------------------------------------ |
 | Mesh                     | Target Mesh                                                  |
 | By distance              | Select based on distance                                     |
