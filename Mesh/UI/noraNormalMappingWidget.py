@@ -99,6 +99,11 @@ class Ui_noraNormalMappingWidget(object):
 
         self.verticalLayout_2.addWidget(self.curveRadioButton)
 
+        self.closestRadioButton = QRadioButton(self.groupBox_2)
+        self.closestRadioButton.setObjectName(u"closestRadioButton")
+
+        self.verticalLayout_2.addWidget(self.closestRadioButton)
+
 
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
 
@@ -193,6 +198,7 @@ class Ui_noraNormalMappingWidget(object):
         self.groupBox_2.setTitle(QCoreApplication.translate("noraNormalMappingWidget", u"Settings", None))
         self.centerRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Center Mode", None))
         self.curveRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Curve Mode", None))
+        self.closestRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Closest Mode", None))
         self.label_2.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Intersect tolerance: ", None))
         self.twoWayCheckBox.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Bidirectional detection", None))
         self.label_3.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Max radius: ", None))

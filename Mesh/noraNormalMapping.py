@@ -62,6 +62,7 @@ class NoraNormalMapping(QtWidgets.QDialog, noraNormalMappingWidget.Ui_noraNormal
     def normal_mapping(self):
         mapping_by_center = self.centerRadioButton.isChecked()
         mapping_by_curve = self.curveRadioButton.isChecked()
+        mapping_by_distance = self.closestRadioButton.isChecked()
         two_way = self.twoWayCheckBox.isChecked()
         intersect_tol = self.tolSpinBox.value()
         center_curve_target = self.curve_select_widget.dag_name
@@ -69,16 +70,17 @@ class NoraNormalMapping(QtWidgets.QDialog, noraNormalMappingWidget.Ui_noraNormal
         max_raidus = self.maxRadiusSpinBox.value()
         shell_mfn = None
         # curve/center
-        if cmds.objExists(center_curve_target):
-            center_curve_target = noraUtilities.get_dag_path_by_name(center_curve_target)
-            if mapping_by_curve:
-                center_curve_target = om.MFnNurbsCurve(center_curve_target)
-                if center_curve_target is None:
-                    print("\'Center/Curve\' not a curve")
-                    return
-        else:
-            print("\'Center/Curve\' not set")
-            return
+        if not mapping_by_distance:
+            if cmds.objExists(center_curve_target):
+                center_curve_target = noraUtilities.get_dag_path_by_name(center_curve_target)
+                if mapping_by_curve:
+                    center_curve_target = om.MFnNurbsCurve(center_curve_target)
+                    if center_curve_target is None:
+                        print("\'Center/Curve\' not a curve")
+                        return
+            else:
+                print("\'Center/Curve\' not set")
+                return
         # shell
         if cmds.objExists(shell_target_dag_path):
             shell_target_dag_path = noraUtilities.get_dag_path_by_name(shell_target_dag_path)
@@ -166,6 +168,23 @@ class NoraNormalMapping(QtWidgets.QDialog, noraNormalMappingWidget.Ui_noraNormal
                     normal_list.append(target_mesh.getVertexNormal(v_idx, True, om.MSpace.kWorld))
                 else:
                     normal_list.append(surface_normal)
+        elif mapping_by_distance:
+            vertices = target_mesh.getPoints(om.MSpace.kWorld)
+            for i in range(vert_num):
+                v_idx = target_indices[i]
+                process_bar.set_progress_bar_value(process_bar_step * i)
+                p2_point = vertices[v_idx]
+                surface_normal = None
+                if shell_mfn.type() == om.MFn.kMesh:
+                    surface_normal = shell_mfn.getClosestNormal(p2_point, om.MSpace.kWorld)[0]
+                else:
+                    point_info = shell_mfn.closestPoint(p2_point)
+                    surface_normal = shell_mfn.normal(point_info[1], point_info[2], om.MSpace.kWorld)
+                if surface_normal is None:
+                    normal_list.append(target_mesh.getVertexNormal(v_idx, True, om.MSpace.kWorld))
+                else:
+                    normal_list.append(surface_normal)
+
         target_mesh.setVertexNormals(normal_list, target_indices, om.MSpace.kWorld)
         process_bar.stop_progress_bar()
 
