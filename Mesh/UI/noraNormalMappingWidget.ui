@@ -68,6 +68,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="clearVertexCachePushButton">
+          <property name="text">
+           <string>Clear vertex cache</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>

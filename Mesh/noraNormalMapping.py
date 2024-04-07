@@ -53,11 +53,16 @@ class NoraNormalMapping(QtWidgets.QDialog, noraNormalMappingWidget.Ui_noraNormal
 
         # event
         self.cacheSelectedVerticesButton.clicked.connect(self.cache_selected_vertices)
+        self.clearVertexCachePushButton.clicked.connect(self.clear_vertices_cache)
         self.normalMappingButton.clicked.connect(self.normal_mapping)
 
     def cache_selected_vertices(self):
         self.selected_vertices = cmds.ls(selection=True, flatten=True)
         self.vertexIndicesCountLineEdit.setText(str(len(self.selected_vertices)))
+
+    def clear_vertices_cache(self):
+        self.selected_vertices = None
+        self.vertexIndicesCountLineEdit.setText("all")
 
     def normal_mapping(self):
         mapping_by_center = self.centerRadioButton.isChecked()

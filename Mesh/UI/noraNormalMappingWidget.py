@@ -59,6 +59,11 @@ class Ui_noraNormalMappingWidget(object):
 
         self.horizontalLayout_2.addWidget(self.cacheSelectedVerticesButton)
 
+        self.clearVertexCachePushButton = QPushButton(self.groupBox)
+        self.clearVertexCachePushButton.setObjectName(u"clearVertexCachePushButton")
+
+        self.horizontalLayout_2.addWidget(self.clearVertexCachePushButton)
+
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
@@ -195,6 +200,7 @@ class Ui_noraNormalMappingWidget(object):
         self.label.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Vertex indices count: ", None))
         self.vertexIndicesCountLineEdit.setText(QCoreApplication.translate("noraNormalMappingWidget", u"all", None))
         self.cacheSelectedVerticesButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Cache selected vertices", None))
+        self.clearVertexCachePushButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Clear vertex cache", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("noraNormalMappingWidget", u"Settings", None))
         self.centerRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Center Mode", None))
         self.curveRadioButton.setText(QCoreApplication.translate("noraNormalMappingWidget", u"Curve Mode", None))
