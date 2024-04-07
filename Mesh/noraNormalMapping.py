@@ -102,6 +102,7 @@ class NoraNormalMapping(QtWidgets.QDialog, noraNormalMappingWidget.Ui_noraNormal
                 return
         else:
             print("\'Shell\' not set")
+            return
         # target
         target_mesh = None
         target_indices = []

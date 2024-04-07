@@ -18,7 +18,7 @@ class NoraMDagObjectSelect(QtWidgets.QDialog, noraMDagNodeSelectWidget.Ui_noraMD
         self.button_icon = self.style().standardIcon(arrow_back)
         self.pushButton.setIcon(self.button_icon)
 
-        self.dag_name = None
+        self.dag_name = "None"
         self.pushButton.clicked.connect(self.get_selected_dag_object)
 
     def get_selected_dag_object(self):
