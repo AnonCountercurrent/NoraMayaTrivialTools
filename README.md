@@ -31,6 +31,7 @@ This function is used to synchronize the normals of one object (usually a smooth
 | Mesh                        | The mesh object to be operated on (can be omitted if selected vertices are cached). |
 | Vertex indices count        | Cached number of vertices.                                   |
 | **Cache selected vertices** | Cache selected vertices.                                     |
+| Clear vertex cache          | -                                                            |
 | Shell                       | The target to map to, which can be a Mesh or a Nurbs surface. |
 | Center/Curve                | The center object or curve to use for mapping. (can be omitted on 'Closest Mode'). |
 | Center Mode                 | The center object's coordinates are $\mathbf{c}$. The function calculate the closest intersection point between the ray starting from $\mathbf{x}$ in the direction of $\mathbf{x} - \mathbf{c}$ and the Shell. |
@@ -53,7 +54,7 @@ Used to select elements that meet the conditions
 | By distance              | Select based on distance                                     |
 | Max distance             | Vertices with a distance greater than this value will be selected |
 | Within the same triangle | Only vertices within the same triangle with a distance greater than this value will be selected |
-| Select vertices          | -                                                            |
+| **Select vertices**      | -                                                            |
 
 
 
@@ -87,6 +88,7 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 | Mesh                        | 要操作的网格对象（如果缓存了选中的顶点的话，可以缺省）       |
 | Vertex indices count        | 缓存的顶点数                                                 |
 | **Cache selected vertices** | 缓存选中的顶点                                               |
+| **Clear vertex cache**      | 清空缓存的顶点                                               |
 | Shell                       | 要映射的目标，可以是 Mesh，也可以是 Nurbs surface            |
 | Center/Curve                | 映射的中心物体，或者曲线（Closest Mode 时可以缺省）          |
 | Center Mode                 | 中心物体坐标为 $\mathbf{c}$，以 $\mathbf{x}$ 为起点， $\mathbf{x} - \mathbf{c}$ 为方向的射线与 Shell 计算最近的交点 |
@@ -109,7 +111,7 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 | By distance              | 根据距离选择                               |
 | Max distance             | 顶点间距离大于此值将会被选中               |
 | Within the same triangle | 仅同一三角形内顶点间距离大于此值才会被选中 |
-| Select vertices          | 执行顶点选择                               |
+| **Select vertices**      | 执行顶点选择                               |
 
 
 
