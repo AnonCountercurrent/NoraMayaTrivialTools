@@ -52,8 +52,8 @@ Used to select elements that meet the conditions
 | ------------------------ | ------------------------------------------------------------ |
 | Mesh                     | Target Mesh                                                  |
 | By distance              | Select based on distance                                     |
-| Max distance             | Vertices with a distance greater than this value will be selected |
-| Within the same triangle | Only vertices within the same triangle with a distance greater than this value will be selected |
+| Max distance             | Vertices with a distance smaller than this value will be selected |
+| Within the same triangle | Only vertices within the same triangle with a distance smaller than this value will be selected |
 | **Select vertices**      | -                                                            |
 
 
@@ -109,8 +109,8 @@ noraMayaTrivialSetup.NoraTrivialTools().load_window()
 | ------------------------ | ------------------------------------------ |
 | Mesh                     | 操作目标网格                               |
 | By distance              | 根据距离选择                               |
-| Max distance             | 顶点间距离大于此值将会被选中               |
-| Within the same triangle | 仅同一三角形内顶点间距离大于此值才会被选中 |
+| Max distance             | 顶点间距离小于此值将会被选中               |
+| Within the same triangle | 仅同一三角形内顶点间距离小于此值才会被选中 |
 | **Select vertices**      | 执行顶点选择                               |
 
 
