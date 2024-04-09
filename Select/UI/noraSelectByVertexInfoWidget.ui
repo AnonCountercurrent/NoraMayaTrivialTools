@@ -51,7 +51,7 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Min distance:</string>
+           <string>Max distance:</string>
           </property>
          </widget>
         </item>

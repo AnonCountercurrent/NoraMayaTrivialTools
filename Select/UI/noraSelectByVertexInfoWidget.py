@@ -109,7 +109,7 @@ class Ui_noraSelectByVertexInfoWidget(object):
         self.groupBox.setTitle(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Targets", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Settings", None))
         self.byDistanceCheckBox.setText(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"By distance", None))
-        self.label.setText(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Min distance:", None))
+        self.label.setText(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Max distance:", None))
         self.sameTriangleCheckBox.setText(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Within the same triangle", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Actions", None))
         self.selectVertButton.setText(QCoreApplication.translate("noraSelectByVertexInfoWidget", u"Select vertices", None))
