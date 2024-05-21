@@ -81,6 +81,11 @@ def get_selected_dag_name():
         return sel[0]
 
 
+def get_selected_mesh():
+    dag_path = get_selected_dag_path()
+    return om.MFnMesh(dag_path)
+
+
 def get_dag_path_by_name(obj_name):
     if cmds.objExists(obj_name):
         cmds.select(obj_name)
