@@ -134,10 +134,18 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
         step_u = (u_end - u_start) / (tex_size - 1.0)
         step_v = (v_end - v_start) / (tex_size - 1.0)
 
+        process_bar = noraUtilities.NoraProgressBar()
+        process_bar.start_progress_bar(max_value=tex_size)
         ray_miss_num = 0
         image = QtGui.QImage(QtCore.QSize(tex_size, tex_size), QtGui.QImage.Format_RGB888)
         image.fill(QtGui.QColor(0, 0, 0))
         for i in range(tex_size):
+            if process_bar.is_progress_bar_cancelled():
+                process_bar.stop_progress_bar()
+                print("cancelled")
+                return
+            else:
+                process_bar.set_progress_bar_value(i)
             for j in range(tex_size):
                 point_pos = None
                 if self.xRadioButton.isChecked():
@@ -158,6 +166,7 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
 
                 normal = (normal + om.MVector(1.0, 1.0, 1.0)) * 0.5 * 255.0
                 image.setPixelColor(i, j, QtGui.QColor(normal.x, normal.z, normal.y))
+        process_bar.stop_progress_bar()
         image.save(save_name_tuple[0], "PNG")
         print("ray miss count: " + str(ray_miss_num))
         print("ray miss rate: " + str(ray_miss_num / (tex_size * tex_size)))
