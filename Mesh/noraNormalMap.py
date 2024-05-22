@@ -134,6 +134,7 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
         step_u = (u_end - u_start) / (tex_size - 1.0)
         step_v = (v_end - v_start) / (tex_size - 1.0)
 
+        ray_miss_num = 0
         image = QtGui.QImage(QtCore.QSize(tex_size, tex_size), QtGui.QImage.Format_RGB888)
         image.fill(QtGui.QColor(0, 0, 0))
         for i in range(tex_size):
@@ -152,8 +153,11 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
                 else:
                     normal = noraUtilities.get_intersect_normal_on_nurbs_surface(shell_mfn, point_pos, point_pos + ray_dir, 1e-8, False, 1e20)
                 if normal is None:
-                    normal = om.MVector(0, 0, 0)
+                    ray_miss_num += 1
+                    normal = om.MVector(-1, -1, -1)
 
                 normal = (normal + om.MVector(1.0, 1.0, 1.0)) * 0.5 * 255.0
                 image.setPixelColor(i, j, QtGui.QColor(normal.x, normal.z, normal.y))
         image.save(save_name_tuple[0], "PNG")
+        print("ray miss count: " + str(ray_miss_num))
+        print("ray miss rate: " + str(ray_miss_num / (tex_size * tex_size)))
