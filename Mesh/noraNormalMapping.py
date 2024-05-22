@@ -24,7 +24,7 @@ def get_width():
 
 
 def get_height():
-    return 700
+    return 600
 
 
 def get_use_custom_front_style():

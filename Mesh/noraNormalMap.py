@@ -60,9 +60,9 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
             if x < bounding[0]:
                 bounding[0] = x
             if x > bounding[1]:
-                bounding[2] = x
+                bounding[1] = x
             if y < bounding[2]:
-                bounding[1] = y
+                bounding[2] = y
             if y > bounding[3]:
                 bounding[3] = y
             if z < bounding[4]:
@@ -111,12 +111,12 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
         u_end = 0.0
         v_end = 0.0
         if self.xRadioButton.isChecked():
-            u_start = self.cached_bounding[2]
-            u_end = self.cached_bounding[3]
-            v_start = self.cached_bounding[4]
-            v_end = self.cached_bounding[5]
+            u_start = self.cached_bounding[4]
+            u_end = self.cached_bounding[5]
+            v_start = self.cached_bounding[2]
+            v_end = self.cached_bounding[3]
             ray_dir = om.MVector(-1, 0, 0)
-            ray_start = om.MVector(self.cached_bounding[1], u_start, v_start)
+            ray_start = om.MVector(self.cached_bounding[1], v_end, u_end)
         elif self.yRadioButton.isChecked():
             u_start = self.cached_bounding[0]
             u_end = self.cached_bounding[1]
@@ -129,8 +129,8 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
             u_end = self.cached_bounding[1]
             v_start = self.cached_bounding[2]
             v_end = self.cached_bounding[3]
-            ray_dir = om.MVector(0, 0, 1)
-            ray_start = om.MVector(u_start, v_start, self.cached_bounding[4])
+            ray_dir = om.MVector(0, 0, -1)
+            ray_start = om.MVector(u_start, v_end, self.cached_bounding[4])
         step_u = (u_end - u_start) / (tex_size - 1.0)
         step_v = (v_end - v_start) / (tex_size - 1.0)
 
@@ -140,11 +140,11 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
             for j in range(tex_size):
                 point_pos = None
                 if self.xRadioButton.isChecked():
-                    point_pos = om.MPoint(0, i * step_u, j * step_v) + ray_start
+                    point_pos = om.MPoint(0, -j * step_v, -i * step_u) + ray_start
                 elif self.yRadioButton.isChecked():
                     point_pos = om.MPoint(i * step_u, 0, j * step_v) + ray_start
                 else:
-                    point_pos = om.MPoint(i * step_u, j * step_v, 0) + ray_start
+                    point_pos = om.MPoint(i * step_u, -j * step_v, 0) + ray_start
 
                 normal = om.MVector(0, 0, 0)
                 if shell_mfn.type() == om.MFn.kMesh:
@@ -152,7 +152,7 @@ class NoraNormalMap(QtWidgets.QDialog, noraNormalMapWidget.Ui_noraNormalMapWidge
                 else:
                     normal = noraUtilities.get_intersect_normal_on_nurbs_surface(shell_mfn, point_pos, point_pos + ray_dir, 1e-8, False, 1e20)
                 if normal is None:
-                    normal = ray_dir
+                    normal = om.MVector(0, 0, 0)
 
                 normal = (normal + om.MVector(1.0, 1.0, 1.0)) * 0.5 * 255.0
                 image.setPixelColor(i, j, QtGui.QColor(normal.x, normal.z, normal.y))
