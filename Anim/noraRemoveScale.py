@@ -98,8 +98,6 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
             for i in range(start_frame, end_frame + 1):
                 key_times.append(om.MTime(i, om.MTime.uiUnit()))
             for i in range(len(dag_paths)):
-                if i > 1:
-                    break
                 full_path_name = dag_paths[i].fullPathName()
                 rotation_x = []
                 rotation_y = []
@@ -109,7 +107,9 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
                     if parent_indices[i] == -1:
                         euler_rotation = om.MTransformationMatrix(matrices[j][i]).rotation(False)
                     else:
-                        parent_rot = om.MTransformationMatrix(matrices[j][parent_indices[i]]).rotation(True)
+                        oma.MAnimControl.setCurrentTime(om.MTime(j, om.MTime.uiUnit()))
+                        parent_rot = om.MTransformationMatrix(dag_paths[parent_indices[i]].inclusiveMatrix()).rotation(True)
+                        last_parent_rot = om.MTransformationMatrix(matrices[j][parent_indices[i]]).rotation(True)
                         child_rot = om.MTransformationMatrix(matrices[j][i]).rotation(True)
                         euler_rotation = (child_rot * parent_rot.inverse()).asEulerRotation()
                     rotation_x.append(euler_rotation.x * 180.0 / 3.14)
@@ -118,7 +118,7 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
                 noraUtilities.set_keyframes(full_path_name, "rotateX", key_times, rotation_x)
                 noraUtilities.set_keyframes(full_path_name, "rotateY", key_times, rotation_y)
                 noraUtilities.set_keyframes(full_path_name, "rotateZ", key_times, rotation_z)
-
+        oma.MAnimControl.setCurrentTime(om.MTime(0, om.MTime.uiUnit()))
 
 
 
