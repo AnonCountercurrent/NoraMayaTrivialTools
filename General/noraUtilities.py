@@ -13,7 +13,8 @@ def collect_sub_dag_paths(in_parent_dag_node, in_parent_idx, out_dag_paths, out_
     for i in range(in_parent_dag_node.childCount()):
         dag_node_i = om.MFnDagNode(in_parent_dag_node.child(i))
         dag_path_i = dag_node_i.getPath()
-
+        if dag_path_i in out_dag_paths:
+            continue
         out_dag_paths.append(dag_path_i)
         out_dag_path_parent_indices.append(in_parent_idx)
         index = len(out_dag_path_parent_indices) - 1

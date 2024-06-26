@@ -56,17 +56,13 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
             pass
 
         dag_paths = []
+        parent_indices = []
         for i in range(selection_ls.length()):
             dag_path = selection_ls.getDagPath(i)
+            dag_paths.append(dag_path)
+            parent_indices.append(-1)
             if collect_sub_objects:
-                new_dag_paths = [dag_path]
-                new_parent_list = [-1]
-                noraUtilities.collect_sub_dag_paths(dag_path, 0, new_dag_paths, new_parent_list)
-                for new_dag_path in new_dag_paths:
-                    if new_dag_path not in dag_paths:
-                        dag_paths.append(new_dag_path)
-            else:
-                dag_paths.append(dag_path)
+                noraUtilities.collect_sub_dag_paths(dag_path, len(dag_paths) - 1, dag_paths, parent_indices)
 
         # [[MMatrix]]
         matrices = noraUtilities.collect_dag_path_matrices(dag_paths, start_frame, end_frame + 1)
@@ -102,13 +98,20 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
             for i in range(start_frame, end_frame + 1):
                 key_times.append(om.MTime(i, om.MTime.uiUnit()))
             for i in range(len(dag_paths)):
+                if i > 1:
+                    break
                 full_path_name = dag_paths[i].fullPathName()
                 rotation_x = []
                 rotation_y = []
                 rotation_z = []
                 for j in range(start_frame, end_frame + 1):
-                    ts = om.MTransformationMatrix(matrices[j][i])
-                    euler_rotation = ts.rotation(False)
+                    euler_rotation = None
+                    if parent_indices[i] == -1:
+                        euler_rotation = om.MTransformationMatrix(matrices[j][i]).rotation(False)
+                    else:
+                        parent_rot = om.MTransformationMatrix(matrices[j][parent_indices[i]]).rotation(True)
+                        child_rot = om.MTransformationMatrix(matrices[j][i]).rotation(True)
+                        euler_rotation = (child_rot * parent_rot.inverse()).asEulerRotation()
                     rotation_x.append(euler_rotation.x * 180.0 / 3.14)
                     rotation_y.append(euler_rotation.y * 180.0 / 3.14)
                     rotation_z.append(euler_rotation.z * 180.0 / 3.14)
