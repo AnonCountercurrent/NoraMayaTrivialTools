@@ -9,6 +9,30 @@ from PySide2 import QtWidgets
 import math
 
 
+def collect_sub_dag_paths(in_parent_dag_node, in_parent_idx, out_dag_paths, out_dag_path_parent_indices):
+    for i in range(in_parent_dag_node.childCount()):
+        dag_node_i = om.MFnDagNode(in_parent_dag_node.child(i))
+        dag_path_i = dag_node_i.getPath()
+
+        out_dag_paths.append(dag_path_i)
+        out_dag_path_parent_indices.append(in_parent_idx)
+        index = len(out_dag_path_parent_indices) - 1
+        collect_sub_dag_paths(dag_node_i, index, out_dag_paths, out_dag_path_parent_indices)
+
+
+def collect_dag_path_matrices(in_dag_paths, in_start_frame, in_end_frame):
+    out_matrices = []
+    current_time = oma.MAnimControl.currentTime()
+    for i in range(in_start_frame, in_end_frame):
+        oma.MAnimControl.setCurrentTime(om.MTime(i, om.MTime.uiUnit()))
+        matrices = []
+        for dag_path in in_dag_paths:
+            matrices.append(dag_path.inclusiveMatrix())
+        out_matrices.append(matrices)
+    oma.MAnimControl.setCurrentTime(om.MTime(current_time))
+    return out_matrices
+
+
 class JointLimit:
     """
     关节约束信息
