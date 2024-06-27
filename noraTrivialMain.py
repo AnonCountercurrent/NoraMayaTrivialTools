@@ -100,5 +100,5 @@ class NoraTrivialMain(QtWidgets.QDialog, Ui_noraMainWindow):
                 self.tabWidget.addTab(tool_box, key)
 
     def closeEvent(self, event):
-        # del noraUtilities
-        pass
+        for module in self.module_map.values():
+            del module

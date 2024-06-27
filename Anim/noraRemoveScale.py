@@ -107,11 +107,11 @@ class NoraNormalMap(QtWidgets.QDialog, noraRemoveScaleWidget.Ui_noraRemoveScaleW
                     if parent_indices[i] == -1:
                         euler_rotation = om.MTransformationMatrix(matrices[j][i]).rotation(False)
                     else:
-                        # oma.MAnimControl.setCurrentTime(om.MTime(j, om.MTime.uiUnit()))
-                        # parent_rot = om.MTransformationMatrix(dag_paths[parent_indices[i]].inclusiveMatrix()).rotation(True)
-                        last_parent_rot = om.MTransformationMatrix(matrices[j][parent_indices[i]]).rotation(True)
+                        oma.MAnimControl.setCurrentTime(om.MTime(j, om.MTime.uiUnit()))
+                        parent_rot = om.MTransformationMatrix(dag_paths[parent_indices[i]].inclusiveMatrix()).rotation(True)
+                        # last_parent_rot = om.MTransformationMatrix(matrices[j][parent_indices[i]]).rotation(True)
                         child_rot = om.MTransformationMatrix(matrices[j][i]).rotation(True)
-                        euler_rotation = (child_rot * last_parent_rot.inverse()).asEulerRotation()
+                        euler_rotation = (child_rot * parent_rot.inverse()).asEulerRotation()
                     rotation_x.append(euler_rotation.x * 180.0 / 3.14)
                     rotation_y.append(euler_rotation.y * 180.0 / 3.14)
                     rotation_z.append(euler_rotation.z * 180.0 / 3.14)
