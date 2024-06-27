@@ -125,6 +125,6 @@ class Ui_noraRemoveScaleWidget(object):
         self.label_4.setText(QCoreApplication.translate("noraRemoveScaleWidget", u"-", None))
         self.rightRange.setText(QCoreApplication.translate("noraRemoveScaleWidget", u"10", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("noraRemoveScaleWidget", u"Actions", None))
-        self.removeScaleButton.setText(QCoreApplication.translate("noraRemoveScaleWidget", u"Remove Scale", None))
+        self.removeScaleButton.setText(QCoreApplication.translate("noraRemoveScaleWidget", u"Remove scale", None))
     # retranslateUi
 

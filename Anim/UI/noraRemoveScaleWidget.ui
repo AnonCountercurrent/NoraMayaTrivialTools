@@ -128,7 +128,7 @@
       <item>
        <widget class="QPushButton" name="removeScaleButton">
         <property name="text">
-         <string>Remove Scale</string>
+         <string>Remove scale</string>
         </property>
        </widget>
       </item>
