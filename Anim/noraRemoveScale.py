@@ -1,6 +1,6 @@
 from importlib import reload
 from PySide2 import QtCore, QtWidgets, QtGui
-from UI import noraRemoveScaleWidget
+from Anim.UI import noraRemoveScaleWidget
 from General import noraMDagObjectSelect
 from General import noraUtilities
 import maya.api.OpenMaya as om
